@@ -206,7 +206,7 @@ The system generates structured CSV files containing:
 
 ### Model Support
 
-- **NVIDIA API Models**: Llama-3.1-70B, Nemotron-70B 
+- **NVIDIA API Models**: Llama-3.1-70B, Nemotron-70B, Llama-4-scout, Llama-4-Maverick 
 - **Local Models**: Qwen2.5-32B-Instruct-GPTQ, Llama-3.1-8B 
 - **Quantization**: 4-bit and 8-bit support for resource efficiency 
 
@@ -237,3 +237,7 @@ The system generates structured CSV files containing:
 ## Contributing
 
 This project is designed for financial professionals, AI researchers, and developers working on domain-specific language models. Contributions focusing on enhanced financial reasoning, improved OCR accuracy, or model optimization are welcome.
+
+## Ongoing work
+
+Multimodal QAR Triplet generation
