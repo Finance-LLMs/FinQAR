@@ -1,11 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
-
-# Create a readme.md file for the github: https://github.com/tanmayhire99/Digital-Persona/tree/main
-
-read the code, understand the code and then give readme
-
-Based on my analysis of the GitHub repository structure and code files, I can now create a comprehensive README.md file for the Digital-Persona project.
-
 # Digital-Persona
 
 A sophisticated financial document analysis and LLM fine-tuning system that automatically extracts financial insights from PDF documents and creates Question-Answer-Reasoning (QAR) datasets for training specialized financial AI models.
