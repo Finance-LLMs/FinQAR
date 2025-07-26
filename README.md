@@ -149,6 +149,9 @@ Key features:
 python inference.py
 ```
 
+<img width="1600" height="780" alt="image" src="https://github.com/user-attachments/assets/11df9049-486a-4973-b520-d3c811718bb1" />
+
+
 - Side-by-side comparison of original vs fine-tuned models[^1]
 - Interactive questioning interface[^1]
 - Performance evaluation for financial domain expertise[^1]
