@@ -10,20 +10,20 @@ Digital-Persona is designed to bridge the gap between unstructured financial doc
 
 ### Part 1: Dataset Generation
 
-- **Advanced OCR Processing**: Uses EasyOCR for page-level text extraction from financial PDFs[^1]
-- **Large Context Analysis**: Handles up to 120K tokens for comprehensive document understanding[^1]
-- **Smart Question Generation**: Creates financial reasoning-based questions per page using configurable token thresholds[^1]
-- **Professional Answer Generation**: Leverages large-context LLMs via NVIDIA API or local GPU inference[^1]
-- **Detailed Reasoning Chains**: Generates CFA-level analytical reasoning for each question-answer pair[^1]
-- **Multiple Processing Options**: Support for both NVIDIA API and local GPU processing[^1]
+- **Advanced OCR Processing**: Uses EasyOCR for page-level text extraction from financial PDFs 
+- **Large Context Analysis**: Handles up to 120K tokens for comprehensive document understanding 
+- **Smart Question Generation**: Creates financial reasoning-based questions per page using configurable token thresholds 
+- **Professional Answer Generation**: Leverages large-context LLMs via NVIDIA API or local GPU inference 
+- **Detailed Reasoning Chains**: Generates CFA-level analytical reasoning for each question-answer pair 
+- **Multiple Processing Options**: Support for both NVIDIA API and local GPU processing 
 
 
 ### Part 2: Model Fine-tuning
 
-- **Efficient Fine-tuning**: Uses LoRA (Low-Rank Adaptation) for memory-efficient training[^1]
-- **4-bit Quantization**: Optimized for resource-constrained environments[^1]
-- **Flexible Model Support**: Compatible with various instruction-tuned models[^1]
-- **Performance Comparison**: Built-in inference comparison between original and fine-tuned models[^1]
+- **Efficient Fine-tuning**: Uses LoRA (Low-Rank Adaptation) for memory-efficient training 
+- **4-bit Quantization**: Optimized for resource-constrained environments 
+- **Flexible Model Support**: Compatible with various instruction-tuned models 
+- **Performance Comparison**: Built-in inference comparison between original and fine-tuned models 
 
 
 ## Project Structure
@@ -103,9 +103,9 @@ max_mem = {
 python generate_QAR_triplets_from_pdf.py
 ```
 
-- Uses advanced models like Llama-3.1-70B for superior reasoning quality[^1]
-- Handles large context windows (up to 128K tokens)[^1]
-- Automatic context truncation and management[^1]
+- Uses advanced models like Llama-3.1-70B for superior reasoning quality 
+- Handles large context windows (up to 128K tokens) 
+- Automatic context truncation and management 
 
 
 #### Using Local GPU
@@ -114,9 +114,9 @@ python generate_QAR_triplets_from_pdf.py
 python generate_QAR_local_GPU.py
 ```
 
-- Processes documents entirely on local hardware[^1]
-- Uses quantized models for memory efficiency[^1]
-- Suitable for sensitive documents requiring on-premise processing[^1]
+- Processes documents entirely on local hardware 
+- Uses quantized models for memory efficiency 
+- Suitable for sensitive documents requiring on-premise processing 
 
 
 #### Using Enhanced NVIDIA API
@@ -125,9 +125,9 @@ python generate_QAR_local_GPU.py
 python qarNvidiaAPI.py
 ```
 
-- Professional-grade system prompts for institutional analysis[^1]
-- Enhanced reasoning with CFA-level financial expertise[^1]
-- Batch question generation for improved efficiency[^1]
+- Professional-grade system prompts for institutional analysis 
+- Enhanced reasoning with CFA-level financial expertise 
+- Batch question generation for improved efficiency 
 
 
 ### Step 2: Fine-tune the Model
@@ -138,9 +138,9 @@ python finetune.py
 
 Key features:
 
-- **LoRA Configuration**: Efficient fine-tuning with minimal resource requirements[^1]
-- **4-bit Quantization**: Reduces memory usage while maintaining performance[^1]
-- **Flexible Training**: Configurable batch sizes and learning rates[^1]
+- **LoRA Configuration**: Efficient fine-tuning with minimal resource requirements 
+- **4-bit Quantization**: Reduces memory usage while maintaining performance 
+- **Flexible Training**: Configurable batch sizes and learning rates 
 
 
 ### Step 3: Compare Performance
@@ -152,9 +152,9 @@ python inference.py
 <img width="1600" height="780" alt="image" src="https://github.com/user-attachments/assets/11df9049-486a-4973-b520-d3c811718bb1" />
 
 
-- Side-by-side comparison of original vs fine-tuned models[^1]
-- Interactive questioning interface[^1]
-- Performance evaluation for financial domain expertise[^1]
+- Side-by-side comparison of original vs fine-tuned models 
+- Interactive questioning interface 
+- Performance evaluation for financial domain expertise 
 
 
 ## System Prompts and Quality
@@ -163,23 +163,23 @@ The system employs professionally crafted prompts designed for institutional-gra
 
 ### Question Generation
 
-- Focuses on valuation, risk analysis, market behavior, and business strategy[^1]
-- Limited to 50 words for clarity and precision[^1]
-- Ensures financial domain relevance[^1]
+- Focuses on valuation, risk analysis, market behavior, and business strategy 
+- Limited to 50 words for clarity and precision 
+- Ensures financial domain relevance 
 
 
 ### Answer Generation
 
-- Senior financial analyst perspective with 200-word responses[^1]
-- Explicit information extraction with clear limitation statements[^1]
-- Professional objectivity with insightful interpretation[^1]
+- Senior financial analyst perspective with 200-word responses 
+- Explicit information extraction with clear limitation statements 
+- Professional objectivity with insightful interpretation 
 
 
 ### Reasoning Generation
 
-- CFA charterholder-level analytical rigor[^1]
-- Step-by-step reasoning connecting numbers to finance principles[^1]
-- Comprehensive 400-word analytical reasoning chains[^1]
+- CFA charterholder-level analytical rigor 
+- Step-by-step reasoning connecting numbers to finance principles 
+- Comprehensive 400-word analytical reasoning chains 
 
 
 ## Output Format
@@ -199,30 +199,30 @@ The system generates structured CSV files containing:
 
 ### Context Management
 
-- **Maximum Context**: 120K tokens with intelligent truncation[^1]
-- **Token Counting**: Uses tiktoken for accurate token management[^1]
-- **Memory Optimization**: Automatic garbage collection and CUDA cache clearing[^1]
+- **Maximum Context**: 120K tokens with intelligent truncation 
+- **Token Counting**: Uses tiktoken for accurate token management 
+- **Memory Optimization**: Automatic garbage collection and CUDA cache clearing 
 
 
 ### Model Support
 
-- **NVIDIA API Models**: Llama-3.1-70B, Nemotron-70B[^1]
-- **Local Models**: Qwen2.5-32B-Instruct-GPTQ, Llama-3.1-8B[^1]
-- **Quantization**: 4-bit and 8-bit support for resource efficiency[^1]
+- **NVIDIA API Models**: Llama-3.1-70B, Nemotron-70B 
+- **Local Models**: Qwen2.5-32B-Instruct-GPTQ, Llama-3.1-8B 
+- **Quantization**: 4-bit and 8-bit support for resource efficiency 
 
 
 ### Quality Controls
 
-- **Temperature Settings**: Low temperature (0.1) for consistent answers[^1]
-- **Retry Logic**: Automatic retry for "[Not Directly Stated]" responses[^1]
-- **Professional Standards**: Institutional-grade analytical rigor[^1]
+- **Temperature Settings**: Low temperature (0.1) for consistent answers 
+- **Retry Logic**: Automatic retry for "[Not Directly Stated]" responses 
+- **Professional Standards**: Institutional-grade analytical rigor 
 
 
 ## Performance Considerations
 
-- **GPU Memory**: Requires 24GB+ VRAM for optimal local processing[^1]
-- **Processing Speed**: 1 question per 100 tokens (configurable)[^1]
-- **Quality vs Speed**: API processing offers higher quality, local processing offers privacy[^1]
+- **GPU Memory**: Requires 24GB+ VRAM for optimal local processing 
+- **Processing Speed**: 1 question per 100 tokens (configurable) 
+- **Quality vs Speed**: API processing offers higher quality, local processing offers privacy 
 
 
 ## Applications
