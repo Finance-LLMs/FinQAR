@@ -33,7 +33,7 @@ Digital-Persona/
 ├── generate_QAR_triplets_from_pdf.py    # NVIDIA API-based QAR generation
 ├── generate_QAR_local_GPU.py            # Local GPU-based QAR generation  
 ├── qarNvidiaAPI.py                      # Enhanced NVIDIA API implementation
-├── fi
+├── finetune.py                          # Finetune a model with the help of generated QAR Triplets
 ├── inference.py                         # Model comparison and inference
 └── README.md                            # Project documentation
 ```
