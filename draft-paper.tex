@@ -193,6 +193,33 @@
 \maketitle
 
 % ---------- Body (aim for <= 2 pages excluding references) ----------
+\section{Introduction}
+Financial documents such as annual reports, earnings calls, and regulatory filings contain dense, high-stakes information. They are lengthy, semi-structured, and often interleave narrative, tables, and figures. For data science and NLP, these documents present two challenges: (\emph{i}) extracting text reliably despite noisy layouts, and (\emph{ii}) converting unstructured narratives into training-ready supervision for large language models (LLMs). While recent advances in LLMs have unlocked strong reasoning ability, their performance in specialized financial tasks remains limited without domain-specific fine-tuning.
+
+Supervised datasets are essential for domain adaptation, but financial QA corpora remain scarce and narrow in scope. FinQA \cite{chen2022finqadatasetnumericalreasoning} is a seminal dataset focusing on numerical reasoning, pairing financial text with expert-written Q\&A and programs. Yet FinQA and similar benchmarks capture only a subset of financial reasoning (primarily numerical). They omit broader analytical dimensions such as qualitative assessment of business strategy, risk identification, or contextual interpretation of market behavior.
+
+To address this gap, we introduce \textbf{Digital-Persona QAR}, a system and dataset designed to generate \emph{Question--Answer--Reasoning (QAR)} triples directly from unstructured financial PDFs. Unlike prior datasets, our pipeline creates diverse financial questions, institutional-grade answers, and explicit reasoning chains, all linked to page-level provenance. The dataset is scalable, reproducible, and designed to train or evaluate LLMs in financial analysis beyond numerical reasoning.
+
+Our contributions are:
+\begin{itemize}
+  \item \textbf{A novel automated pipeline} that ingests unstructured PDFs, performs GPU-accelerated OCR, manages progressive long-context accumulation (up to $\sim$990K tokens), and generates density-aware questions with professional-grade answers and rationales.
+  \item \textbf{A new dataset schema} for financial QAR triples with full provenance and reasoning transparency, covering valuation, risk, market behavior, and strategy.
+  \item \textbf{Domain adaptation results} showing that fine-tuning an 8B LLaMA-family model with LoRA and 4-bit quantization (QLoRA \cite{dettmers2023qloraefficientfinetuningquantized}) yields a compact \emph{financial analyst} model. In blind expert review, the fine-tuned model is preferred in 80\% of cases over the base model, with +25\% ROUGE-L improvement against reference rationales.
+  \item \textbf{Public release} of the dataset and scripts to foster reproducibility and downstream research in financial NLP.
+\end{itemize}
+
+\section{Related Work}
+\paragraph{Financial QA datasets.}
+FinQA \cite{chen2022finqadatasetnumericalreasoning} pioneered large-scale QA for numerical reasoning in financial documents, but is limited to quantitative problems. TAT-QA and ConvFinQA extend to table-based and conversational reasoning, respectively, but remain focused on numeric operations. None provide long-context narrative analysis with reasoning chains. Digital-Persona QAR complements these by targeting \emph{narrative-rich, qualitative, and mixed} financial reasoning.
+
+\paragraph{Domain adaptation of LLMs.}
+Parameter-efficient fine-tuning has emerged as a practical path to domain-specific adaptation. QLoRA \cite{dettmers2023qloraefficientfinetuningquantized} enables fine-tuning of billion-scale LLMs on consumer hardware by combining LoRA adapters with 4-bit quantization. We leverage QLoRA to adapt an 8B LLaMA-family model on our QAR dataset, achieving strong improvements in expert preference and factual grounding. Our work demonstrates that combining synthetic supervision with efficient fine-tuning can yield domain-expert models without prohibitive compute costs.
+
+\paragraph{Long-context modeling.}
+Handling financial documents requires reasoning over hundreds of pages. Recent long-context LLMs (e.g., models supporting 100K+ tokens) partially address this, but practical pipelines for dataset generation remain underexplored. Digital-Persona QAR introduces \emph{progressive context accumulation}, ensuring that questions generated for later pages remain grounded in earlier information. This design mirrors how financial analysts synthesize insights across entire reports.
+
+In summary, while prior datasets and methods address slices of the problem (numerical QA, table reasoning, conversational QA, or efficient fine-tuning), our contribution lies in combining: (1) long-context document ingestion, (2) scalable QAR dataset generation, and (3) efficient domain adaptation of LLMs. This combination yields a reproducible framework for financial document understanding that complements and extends the state of the art.
+
 \section{Motivation \& Contribution}
 Financial reports (annual reports, call transcripts, filings) contain dense domain knowledge but are difficult to exploit directly due to layout noise, length, and specialized jargon. LLMs benefit from curated, domain-specific supervision, yet financial QA datasets with transparent rationales are limited. Existing datasets such as FinQA \cite{chen2022finqadatasetnumericalreasoning} provide expert-written questions and numerical reasoning chains, but focus narrowly on quantitative reasoning. They do not capture broader strategic or qualitative analysis. \textbf{Digital-Persona QAR} contributes:
 \begin{itemize}
