@@ -1,0 +1,271 @@
+%%
+%% This is file `sample-sigconf-authordraft.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% samples.dtx  (with options: `all,proceedings,bibtex,authordraft')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from sample-sigconf-authordraft.tex.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file samples.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%%
+%%
+%% Commands for TeXCount
+%TC:macro \cite [option:text,text]
+%TC:macro \citep [option:text,text]
+%TC:macro \citet [option:text,text]
+%TC:envir table 0 1
+%TC:envir table* 0 1
+%TC:envir tabular [ignore] word
+%TC:envir displaymath 0 word
+%TC:envir math 0 word
+%TC:envir comment 0 0
+%%
+%% The first command in your LaTeX source must be the \documentclass
+%% command.
+%%
+%% For submission and review of your manuscript please change the
+%% command to \documentclass[manuscript, screen, review]{acmart}.
+%%
+%% When submitting camera ready or to TAPS, please change the command
+%% to \documentclass[sigconf]{acmart} or whichever template is required
+%% for your publication.
+%%
+%%
+
+% \documentclass[sigconf,authordraft]{acmart}
+\documentclass[sigconf,authordraft,anonymous]{acmart}
+% \documentclass[manuscript, screen, review]{acmart}
+
+%%
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    Bib\TeX}}}
+
+%% Rights management information.  This information is sent to you
+%% when you complete the rights form.  These commands have SAMPLE
+%% values in them; it is your responsibility as an author to replace
+%% the commands and values with those provided to you when you
+%% complete the rights form.
+\setcopyright{acmlicensed}
+\copyrightyear{2018}
+\acmYear{2018}
+\acmDOI{XXXXXXX.XXXXXXX}
+%% These commands are for a PROCEEDINGS abstract or paper.
+\acmConference[Conference acronym 'XX]{Make sure to enter the correct
+  conference title from your rights confirmation email}{June 03--05,
+  2018}{Woodstock, NY}
+%%
+%%  Uncomment \acmBooktitle if the title of the proceedings is different
+%%  from ``Proceedings of ...''!
+%%
+%%\acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
+%%  June 03--05, 2018, Woodstock, NY}
+\acmISBN{978-1-4503-XXXX-X/2018/06}
+
+
+%%
+%% Submission ID.
+%% Use this when submitting an article to a sponsored event. You'll
+%% receive a unique submission ID from the organizers
+%% of the event, and this ID should be used as the parameter to this command.
+%%\acmSubmissionID{123-A56-BU3}
+
+%%
+%% For managing citations, it is recommended to use bibliography
+%% files in BibTeX format.
+%%
+%% You can then either use BibTeX with the ACM-Reference-Format style,
+%% or BibLaTeX with the acmnumeric or acmauthoryear sytles, that include
+%% support for advanced citation of software artefact from the
+%% biblatex-software package, also separately available on CTAN.
+%%
+%% Look at the sample-*-biblatex.tex files for templates showcasing
+%% the biblatex styles.
+%%
+
+%%
+%% The majority of ACM publications use numbered citations and
+%% references.  The command \citestyle{authoryear} switches to the
+%% "author year" style.
+%%
+%% If you are preparing content for an event
+%% sponsored by ACM SIGGRAPH, you must use the "author year" style of
+%% citations and references.
+%% Uncommenting
+%% the next command will enable that style.
+%%\citestyle{acmauthoryear}
+
+
+%%
+%% end of the preamble, start of the body of the document source.
+\begin{document}
+
+%%
+%% The "title" command has an optional parameter,
+%% allowing the author to define a "short title" to be used in page headers.
+\title{Digital-Persona QAR: A Dataset and Pipeline for Financial Question--Answer--Reasoning from Unstructured Documents}
+
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+%% Of note is the shared affiliation of the first two authors, and the
+%% "authornote" and "authornotemark" commands
+%% used to denote shared contribution to the research.
+\author{Ben Trovato}
+\authornote{Both authors contributed equally to this research.}
+\email{trovato@corporation.com}
+\orcid{1234-5678-9012}
+\author{G.K.M. Tobin}
+\authornotemark[1]
+\email{webmaster@marysville-ohio.com}
+\affiliation{%
+  \institution{Institute for Clarity in Documentation}
+  \city{Dublin}
+  \state{Ohio}
+  \country{USA}
+}
+
+%%
+%% By default, the full list of authors will be used in the page
+%% headers. Often, this list is too long, and will overlap
+%% other information printed in the page headers. This command allows
+%% the author to define a more concise list
+%% of authors' names for this purpose.
+\renewcommand{\shortauthors}{Trovato et al.}
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+\begin{abstract}
+    We present \textbf{Digital-Persona QAR}, a dataset and automated pipeline that converts long, unstructured financial PDFs into structured \emph{Question--Answer--Reasoning (QAR)} triples suitable for domain-specific LLM training. The pipeline performs GPU OCR, progressive long-context accumulation (up to $\sim$990K tokens), density-aware question generation (one question per $\sim$100 tokens), and professional-grade answer \& rationale synthesis, then packages samples with full page traceability. Using LoRA with 4-bit quantization (QLoRA), we fine-tune an 8B LLM on the generated QAR to obtain a compact \emph{financial analyst} model. In a blind expert study, the fine-tuned model is preferred in \textbf{80\%} of head-to-head answers versus the base model and improves ROUGE-L by \textbf{+25\%} on unseen questions from the same source document. The dataset and scripts will be released publicly. This extended abstract details the dataset design, pipeline, statistics, and validation, positioning Digital-Persona QAR as a reproducible resource for financial document understanding at scale.
+\end{abstract}
+
+%%
+%% The code below is generated by the tool at http://dl.acm.org/ccs.cfm.
+%% Please copy and paste the code instead of the example below.
+%%
+\begin{CCSXML}
+<ccs2012>
+ <concept>
+  <concept_id>10002951.10003317.10003318</concept_id>
+  <concept_desc>Information systems~Document representation</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10010147.10010178.10010187</concept_id>
+  <concept_desc>Computing methodologies~Natural language processing</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10002951.10003260.10003261</concept_id>
+  <concept_desc>Information systems~Data mining</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[300]{Information systems~Document representation}
+\ccsdesc[300]{Computing methodologies~Natural language processing}
+\ccsdesc[300]{Information systems~Data mining}
+
+%%
+%% Keywords. The author(s) should pick words that accurately describe
+%% the work being presented. Separate the keywords with commas.
+\keywords{dataset, financial QA, long-context LLMs, OCR, LoRA/QLoRA, reasoning}
+
+%%
+%% This command processes the author and affiliation and title
+%% information and builds the first part of the formatted document.
+\maketitle
+
+% ---------- Body (aim for <= 2 pages excluding references) ----------
+\section{Motivation \& Contribution}
+Financial reports (annual reports, call transcripts, filings) contain dense domain knowledge but are difficult to exploit directly due to layout noise, length, and specialized jargon. LLMs benefit from curated, domain-specific supervision, yet financial QA datasets with transparent rationales are limited. \textbf{Digital-Persona QAR} contributes:
+\begin{itemize}
+  \item \textbf{Automated dataset creation} from raw PDFs into QAR triples covering valuation, risk, market behavior, and strategy.
+  \item \textbf{Progressive long-context} processing that preserves cross-page dependencies for question generation.
+  \item \textbf{Training-ready schema} with per-sample provenance (page IDs, token counts) for auditability.
+  \item \textbf{Efficient domain adaptation} using LoRA with 4-bit quantization (QLoRA) to fine-tune an 8B model on a single GPU.
+\end{itemize}
+
+\section{Pipeline \& Dataset Design}
+\paragraph{OCR \& Text Assembly.}
+PDFs are rasterized and processed with GPU-accelerated EasyOCR at line-level, then aggregated into page text. We maintain a mapping $\{\texttt{page\_id} \rightarrow \texttt{text}\}$ for traceability.
+
+\paragraph{Progressive Context.}
+Text is appended page-by-page into a cumulative buffer; we track tokens with \texttt{tiktoken}. When exceeding a configured cap (up to $\sim$990K tokens depending on model), we truncate oldest segments to retain the most relevant recent context.
+
+\paragraph{Density-aware Questioning.}
+For each page, we allocate $\max(1, \lfloor \texttt{page\_tokens}/100 \rfloor)$ questions and batch-generate them via an instruction-tuned LLM (cloud 70B or local 32B), capped at 50 words each, targeting finance themes (valuation, risk, market behavior, strategy).
+
+\paragraph{Answer \& Reasoning.}
+Answers (180--250 words) follow a professional template (executive summary, evidence with quantitative details, implications). Reasoning is a cohesive $\sim$400-word explanation beginning \emph{``Based solely on the text:''} and explicitly flags limitations when information is absent.
+
+\paragraph{Schema.}
+Each record stores: \texttt{page\_number}, \texttt{page\_tokens}, \texttt{questions\_generated}, \texttt{cumulative\_context\_tokens}, \texttt{question}, \texttt{answer}, \texttt{reasoning}. The format is released as CSV/JSON for training and analysis.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.8\linewidth]{workflow.png}
+  \caption{Digital-Persona QAR pipeline: OCR $\rightarrow$ progressive context $\rightarrow$ density-aware Q generation $\rightarrow$ answer \& reasoning $\rightarrow$ packaged QAR dataset.}
+  \label{fig:workflow}
+\end{figure}
+
+\section{Dataset Snapshot \& Statistics}
+On a representative financial text ($\sim$100 pages), the pipeline generated $\sim$450 QAR samples (\texttt{mean}=4.5/page; SD depends on token density). Themes were balanced across valuation (27\%), risk (25\%), market behavior (24\%), and strategy (24\%). Each sample links back to its page for auditing.
+
+\section{Fine-tuning Setup}
+We fine-tune a LLaMA-family 8B model with \textbf{LoRA} (rank 32, dropout 0.05) and \textbf{4-bit} NF4 quantization with double quantization; compute in bfloat16. Training uses effective batch size 16 via gradient accumulation, LR $2\!\times\!10^{-4}$, and sequence length 512.
+
+\section{Evaluation}
+\textbf{Expert Preference.} A CFA-level reviewer blind-compared base vs.\ fine-tuned answers to unseen questions from the same document; the fine-tuned model was preferred in \textbf{80\%} cases for precision of terminology and evidence use.\\
+\textbf{Textual Overlap.} ROUGE-L against reference rationales improved by \textbf{+25\%} (relative).\\
+\textbf{Ablations.} Removing progressive context caused drops in cross-page coherence and fewer quantitative citations in answers.
+
+\section{Ethics \& Broader Impact}
+We avoid speculative claims; answers explicitly note data limitations. The dataset targets publicly accessible financial texts and omits PII. Potential misuse (overreliance on autogenerated analysis) is mitigated by retaining page-level provenance and urging human oversight.
+
+\section{Availability}
+\textbf{Public release.} We will release the QAR dataset and scripts at a public URL (Google Drive) for research use upon publication, together with reproducible configs for OCR, generation, and LoRA fine-tuning.
+
+
+
+% %%
+% %% The acknowledgments section is defined using the "acks" environment
+% %% (and NOT an unnumbered section). This ensures the proper
+% %% identification of the section in the article metadata, and the
+% %% consistent spelling of the heading.
+% \begin{acks}
+% To Robert, for the bagels and explaining CMYK and color spaces.
+% \end{acks}
+
+%%
+%% The next two lines define the bibliography style to be used, and
+%% the bibliography file.
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{sample-base}
+
+
+%%
+%% If your work has an appendix, this is the place to put it.
+\appendix
+
+
+\end{document}
+\endinput
+%%
+%% End of file `sample-sigconf-authordraft.tex'.
