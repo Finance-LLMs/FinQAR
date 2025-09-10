@@ -1,5 +1,8 @@
 # Digital-Persona
 
+A dataset for this project is available at the following Google Drive link:
+[Dataset Download](https://drive.google.com/drive/folders/1KjHJuadd6VclbZd-yAIUBjlw0VWJi96S?usp=sharing)
+
 A sophisticated financial document analysis and LLM fine-tuning system that automatically extracts financial insights from PDF documents and creates Question-Answer-Reasoning (QAR) datasets for training specialized financial AI models.
 
 ## Overview
