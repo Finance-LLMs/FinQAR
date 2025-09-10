@@ -241,6 +241,6 @@ The system generates structured CSV files containing:
 
 This project is designed for financial professionals, AI researchers, and developers working on domain-specific language models. Contributions focusing on enhanced financial reasoning, improved OCR accuracy, or model optimization are welcome.
 
-## Ongoing work
+## License
 
-Multimodal QAR Triplet generation
+This project is licensed under [MIT LICENSE](LICENSE).
