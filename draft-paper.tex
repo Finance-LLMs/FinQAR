@@ -189,6 +189,12 @@
 %% information and builds the first part of the formatted document.
 \maketitle
 
+\begingroup
+\renewcommand\thefootnote{}\footnotetext{Dataset: \url{https://drive.google.com/drive/folders/1KjHJuadd6VclbZd-yAIUBjlw0VWJi96S?usp=sharing} \quad
+Anonymized code: \url{http://anonymous.4open.science/r/Digital-Persona}}
+\addtocounter{footnote}{0}
+\endgroup
+
 % ---------- Body (aim for <= 2 pages excluding references) ----------
 \section{Introduction}
 Financial documents such as annual reports, earnings calls, and regulatory filings contain dense, high-stakes information. They are lengthy, semi-structured, and often interleave narrative, tables, and figures~\cite{Meirkulov2024,FINRA2023}. For data science and NLP, these documents present two challenges: (\emph{i}) extracting text reliably despite noisy layouts, and (\emph{ii}) converting unstructured narratives into training-ready supervision for large language models (LLMs)~\cite{Feng2021}. While recent advances in LLMs have unlocked strong reasoning ability, their performance in specialized financial tasks remains limited without domain-specific fine-tuning~\cite{Jeong2024}.
@@ -263,10 +269,6 @@ We fine-tune a LLaMA-family 8B model with \textbf{LoRA} (rank 32, dropout 0.05) 
 
 \section{Impact \& Broader Applications}
 The QAR dataset enables research in: (1) investment analysis assistants, (2) compliance and regulatory audits, (3) financial education tools, and (4) explainable AI in finance. Its transparent rationales support model interpretability and educational use. Ethical safeguards include limiting data to publicly available reports and encouraging human oversight to mitigate overreliance. 
-
-\section{Availability}
-\textbf{Public release.} The QAR dataset and scripts will be released at a public URL (Google Drive) upon publication, with reproducible configs for OCR, generation, and LoRA fine-tuning. This aligns with best practices in open data, facilitating benchmarking and extension to multilingual or multimodal settings.
-
 
 
 % %%
