@@ -125,7 +125,6 @@
 \author{Ben Trovato}
 \authornote{Both authors contributed equally to this research.}
 \email{trovato@corporation.com}
-\orcid{1234-5678-9012}
 \author{G.K.M. Tobin}
 \authornotemark[1]
 \email{webmaster@marysville-ohio.com}
@@ -148,7 +147,7 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-    We present \textbf{Digital-Persona QAR}, a dataset and automated pipeline that converts long, unstructured financial PDFs into structured \emph{Question--Answer--Reasoning (QAR)} triples suitable for domain-specific LLM training. The pipeline performs GPU OCR, progressive long-context accumulation (up to $\sim$990K tokens), density-aware question generation (one question per $\sim$100 tokens), and professional-grade answer \& rationale synthesis, then packages samples with full page traceability. Using LoRA with 4-bit quantization (QLoRA), we fine-tune an 8B LLM on the generated QAR to obtain a compact \emph{financial analyst} model. In a blind expert study, the fine-tuned model is preferred in \textbf{80\%} of head-to-head answers versus the base model and improves ROUGE-L by \textbf{+25\%} on unseen questions from the same source document. The dataset and scripts will be released publicly. This extended abstract details the dataset design, pipeline, statistics, and validation, positioning Digital-Persona QAR as a reproducible resource for financial document understanding at scale.
+    We present \textbf{Digital-Persona QAR}, a dataset and pipeline that converts unstructured financial PDFs into structured \emph{Question--Answer--Reasoning (QAR)} triples for domain-specific LLM training. The pipeline performs GPU OCR, progressive long-context accumulation (up to $\sim$990K tokens), density-aware question generation, and rationale synthesis with page traceability. Using QLoRA, we fine-tune an 8B LLM into a compact \emph{financial analyst} model. In a blind expert study, the fine-tuned model is preferred in \textbf{80\%} of head-to-head answers and improves ROUGE-L by \textbf{+25\%} on unseen questions. This extended abstract details dataset design, pipeline, statistics, and validation, positioning Digital-Persona QAR as a reproducible resource for financial document understanding.
 \end{abstract}
 
 %%
@@ -189,13 +188,13 @@
 %% information and builds the first part of the formatted document.
 \maketitle
 
-\begingroup
-\renewcommand\thefootnote{}\footnotetext{Dataset: \url{https://drive.google.com/drive/folders/1KjHJuadd6VclbZd-yAIUBjlw0VWJi96S?usp=sharing} \quad
-Anonymized code: \url{http://anonymous.4open.science/r/Digital-Persona}}
-\addtocounter{footnote}{0}
-\endgroup
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\footnotetext{
+Dataset: \url{https://drive.google.com/drive/folders/1KjHJuadd6VclbZd-yAIUBjlw0VWJi96S?usp=sharing} \\
+Anonymized code: \url{http://anonymous.4open.science/r/Digital-Persona}
+}
 
-% ---------- Body (aim for <= 2 pages excluding references) ----------
+% ---------- Body (≤2 pages excluding references) ----------
 \section{Introduction}
 Financial documents such as annual reports, earnings calls, and regulatory filings contain dense, high-stakes information. They are lengthy, semi-structured, and often interleave narrative, tables, and figures~\cite{Meirkulov2024,FINRA2023}. For data science and NLP, these documents present two challenges: (\emph{i}) extracting text reliably despite noisy layouts, and (\emph{ii}) converting unstructured narratives into training-ready supervision for large language models (LLMs)~\cite{Feng2021}. While recent advances in LLMs have unlocked strong reasoning ability, their performance in specialized financial tasks remains limited without domain-specific fine-tuning~\cite{Jeong2024}.
 
@@ -213,15 +212,15 @@ Our contributions are:
 
 \section{Related Work}
 \paragraph{Financial QA datasets.}
-FinQA~\cite{chen2022finqadatasetnumericalreasoning} pioneered large-scale QA for numerical reasoning in financial documents, but is limited to quantitative problems. TAT-QA and ConvFinQA extend to table-based and conversational reasoning, respectively, but remain focused on numeric operations~\cite{Zhu2021TATQA,Chen2022ConvFinQA}. None provide long-context narrative analysis with reasoning chains~\cite{Reddy2024DocFinQA}. Digital-Persona QAR complements these by targeting \emph{narrative-rich, qualitative, and mixed} financial reasoning.
+FinQA~\cite{chen2022finqadatasetnumericalreasoning} pioneered QA for numerical reasoning. TAT-QA and ConvFinQA extended table-based and conversational reasoning~\cite{Zhu2021TATQA,Chen2022ConvFinQA}, but all remain focused on numeric operations. None provide narrative-rich reasoning chains~\cite{Reddy2024DocFinQA}. Digital-Persona QAR complements these by targeting qualitative and mixed reasoning.
 
 \paragraph{Domain adaptation of LLMs.}
-Parameter-efficient fine-tuning has emerged as a practical path to domain-specific adaptation. QLoRA~\cite{dettmers2023qloraefficientfinetuningquantized} enables fine-tuning of billion-scale LLMs on consumer hardware by combining LoRA adapters with 4-bit quantization. We leverage QLoRA to adapt an 8B LLaMA-family model on our QAR dataset, achieving strong improvements in expert preference and factual grounding. Our work demonstrates that combining synthetic supervision with efficient fine-tuning can yield domain-expert models without prohibitive compute costs.
+Parameter-efficient fine-tuning (e.g., QLoRA~\cite{dettmers2023qloraefficientfinetuningquantized}) enables domain-specific adaptation on modest hardware. We adapt an 8B LLaMA-family model on our dataset, showing strong improvements in preference and grounding.
 
 \paragraph{Long-context modeling.}
-Handling financial documents requires reasoning over hundreds of pages. Recent long-context LLMs (e.g., models supporting 100K+ tokens) partially address this, but practical pipelines for dataset generation remain underexplored. Digital-Persona QAR introduces \emph{progressive context accumulation}, ensuring that questions generated for later pages remain grounded in earlier information. This design mirrors how financial analysts synthesize insights across entire reports.
+Handling financial documents requires reasoning across hundreds of pages. Recent long-context LLMs partially address this, but pipelines for dataset generation remain underexplored. Digital-Persona QAR introduces \emph{progressive context accumulation}, mirroring how analysts synthesize insights across reports.
 
-In summary, while prior datasets and methods address slices of the problem (numerical QA, table reasoning, conversational QA, or efficient fine-tuning), our contribution lies in combining: (1) long-context document ingestion, (2) scalable QAR dataset generation, and (3) efficient domain adaptation of LLMs. This combination yields a reproducible framework for financial document understanding that complements and extends the state of the art.
+In summary, prior work covers slices of the problem, while we combine (1) long-context ingestion, (2) scalable QAR generation, and (3) efficient domain adaptation into a reproducible framework for financial document understanding.
 
 \section{Motivation \& Contribution}
 Financial reports (annual reports, call transcripts, filings) contain dense domain knowledge but are difficult to exploit directly due to layout noise, length, and specialized jargon. LLMs benefit from curated, domain-specific supervision, yet financial QA datasets with transparent rationales are limited. Existing datasets such as FinQA~\cite{chen2022finqadatasetnumericalreasoning} provide expert-written questions and numerical reasoning chains, but focus narrowly on quantitative reasoning. They do not capture broader strategic or qualitative analysis. \textbf{Digital-Persona QAR} contributes:
@@ -234,19 +233,19 @@ Financial reports (annual reports, call transcripts, filings) contain dense doma
 
 \section{Pipeline \& Dataset Design}
 \paragraph{OCR \& Text Assembly.}
-PDFs are rasterized and processed with GPU-accelerated EasyOCR at line-level, then aggregated into page text. While robust for standard prose, OCR accuracy can degrade on financial tables or scans with low resolution. We maintain a mapping $\{\texttt{page\_id} \rightarrow \texttt{text}\}$ for traceability and error analysis.
+PDFs are rasterized and processed with GPU-accelerated EasyOCR at line-level, then aggregated into page text. We maintain $\{\texttt{page\_id} \rightarrow \texttt{text}\}$ mappings for traceability.
 
 \paragraph{Progressive Context.}
-Text is appended page-by-page into a cumulative buffer; we track tokens with \texttt{tiktoken}. When exceeding a configured cap (up to $\sim$990K tokens depending on model), we truncate oldest segments to retain the most recent context. This progressive building allows downstream models to ask cross-referential questions, e.g., linking financial outcomes on page 80 to strategies outlined on page 10.
+Text is appended page-by-page into a cumulative buffer, tracked with \texttt{tiktoken}. Once the cap ($\sim$990K tokens) is reached, older segments are truncated to retain recent context.
 
 \paragraph{Density-aware Questioning.}
-For each page, we allocate $\max(1, \lfloor \texttt{page\_tokens}/100 \rfloor)$ questions, balancing coverage across dense and sparse sections. This contrasts with fixed-Q-per-page strategies, yielding more proportional sampling of information-rich sections. Questions are capped at 50 words, tailored to themes of valuation, risk, market behaviour, and strategy.
+For each page, $\max(1, \lfloor \texttt{page\_tokens}/100 \rfloor)$ questions are generated, yielding proportional coverage of dense sections. Questions are capped at 50 words.
 
 \paragraph{Answer \& Reasoning.}
-Answers (180--250 words) follow a professional template (executive summary, quantitative evidence, implications). Reasoning is a cohesive $\sim$400-word explanation beginning \emph{``Based solely on the text:''}, providing transparent chain-of-thought and explicitly flagging limitations when data is absent.
+Answers (180--250 words) follow a professional template. Reasoning is a cohesive $\sim$400-word explanation beginning \emph{``Based solely on the text:''}.
 
 \paragraph{Schema.}
-Each record stores: \texttt{page\_number}, \texttt{page\_tokens}, \texttt{questions\_generated}, \texttt{cumulative\_context\_tokens}, \texttt{question}, \texttt{answer}, \texttt{reasoning}. The format (CSV/JSON) supports supervised training and reproducible evaluation.
+Each record stores: \texttt{page\_number}, \texttt{tokens}, \texttt{questions}, \texttt{context\_tokens}, \texttt{question}, \texttt{answer}, \texttt{reasoning}.
 
 \begin{figure}[t]
   \centering
@@ -259,13 +258,13 @@ Each record stores: \texttt{page\_number}, \texttt{page\_tokens}, \texttt{questi
 On a representative financial text ($\sim$100 pages), the pipeline generated $\sim$450 QAR samples (\texttt{mean}=4.5/page; SD depends on token density). Themes were balanced across valuation (27\%), risk (25\%), market behavior (24\%), and strategy (24\%). Each sample links back to its page for auditing.
 
 \section{Evaluation \& Results}
-We fine-tune a LLaMA-family 8B model with \textbf{LoRA} (rank 32, dropout 0.05) and \textbf{4-bit} NF4 quantization, following QLoRA \cite{dettmers2023qloraefficientfinetuningquantized}. Training uses effective batch size 16 via gradient accumulation, LR $2\!\times\!10^{-4}$, and sequence length 512.
+We fine-tune a LLaMA-family 8B model with \textbf{LoRA} (rank 32, dropout 0.05) and \textbf{4-bit} NF4 quantization. Training used batch size 16, LR $2\!\times\!10^{-4}$, and sequence length 512.
 
-\textbf{Expert Study.} A CFA-level reviewer blind-compared base vs.\ fine-tuned answers to 50 unseen questions. The fine-tuned model was preferred in \textbf{80\%} cases for precise terminology and stronger evidence use. Inter-rater agreement (Cohen’s $\kappa$) was 0.72, indicating substantial agreement.
+\textbf{Expert Study.} A CFA-level reviewer blind-compared base vs.\ fine-tuned answers to 50 unseen questions. The fine-tuned model was preferred in \textbf{80\%} of cases. Cohen’s $\kappa$=0.72 indicated substantial agreement.
 
-\textbf{Automatic Metrics.} ROUGE-L against reference rationales improved by \textbf{+25\%} relative to the base. Latency for QAR generation averaged 1.2s/question on a 24GB GPU, confirming practicality for large-scale use.
+\textbf{Automatic Metrics.} ROUGE-L improved by \textbf{+25\%}. Latency averaged 1.2s/question, confirming scalability.
 
-\textbf{Ablations.} Removing progressive context reduced cross-page coherence and decreased quantitative citations. Without density-aware questioning, coverage of risk-related content dropped by 15\%.
+\textbf{Ablations.} Removing progressive context reduced coherence. Without density-aware questioning, risk-related coverage dropped 15\%.
 
 \section{Impact \& Broader Applications}
 The QAR dataset enables research in: (1) investment analysis assistants, (2) compliance and regulatory audits, (3) financial education tools, and (4) explainable AI in finance. Its transparent rationales support model interpretability and educational use. Ethical safeguards include limiting data to publicly available reports and encouraging human oversight to mitigate overreliance. 
