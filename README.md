@@ -29,17 +29,29 @@ Digital-Persona is designed to bridge the gap between unstructured financial doc
 - **Performance Comparison**: Built-in inference comparison between original and fine-tuned models 
 
 
+
 ## Project Structure
 
 ```
 Digital-Persona/
-├── generate_QAR_triplets_from_pdf.py    # NVIDIA API-based QAR generation
-├── generate_QAR_local_GPU.py            # Local GPU-based QAR generation  
-├── qarNvidiaAPI.py                      # Enhanced NVIDIA API implementation
-├── finetune.py                          # Finetune a model with the help of generated QAR Triplets
-├── inference.py                         # Model comparison and inference
-└── README.md                            # Project documentation
+├── data/
+│   └── README.md                # Dataset documentation and download link
+├── QAR-Generation/
+│   ├── generate_QAR_local_GPU.py
+│   ├── generate_QAR_triplets_from_pdf.py
+│   └── qarNvidiaAPI.py
+├── scripts/
+│   ├── finetune.py
+│   └── inference.py
+├── README.md                    # Project documentation
 ```
+
+### Folder Overview
+
+- **data/**: Contains dataset documentation and download instructions.
+- **QAR-Generation/**: Scripts for generating Question-Answer-Reasoning (QAR) triplets from financial PDFs using local GPU or NVIDIA API.
+- **scripts/**: Scripts for model fine-tuning and inference/comparison.
+- **README.md**: Main project documentation and instructions.
 
 
 ## Installation
@@ -243,4 +255,4 @@ This project is designed for financial professionals, AI researchers, and develo
 
 ## License
 
-This project is licensed under [MIT LICENSE](LICENSE).
+This project is licensed under [MIT License](LICENSE).
