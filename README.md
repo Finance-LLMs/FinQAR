@@ -43,7 +43,7 @@ FinQAR/
 ├── scripts/
 │   ├── finetune.py
 │   └── inference.py
-├── README.md                    # Project documentation
+└── README.md                    # Project documentation
 ```
 
 ### Folder Overview
