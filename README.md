@@ -1,4 +1,4 @@
-# Digital-Persona
+# FinQAR
 
 A dataset for this project is available at the following Google Drive link:
 [Dataset Download](https://drive.google.com/drive/folders/1KjHJuadd6VclbZd-yAIUBjlw0VWJi96S?usp=sharing)
@@ -7,7 +7,7 @@ A sophisticated financial document analysis and LLM fine-tuning system that auto
 
 ## Overview
 
-Digital-Persona is designed to bridge the gap between unstructured financial documents and structured AI training data. The system performs OCR on financial PDFs, generates contextual questions based on financial reasoning, provides comprehensive answers, and creates detailed reasoning chains - all optimized for fine-tuning language models to become domain-specific financial experts.
+FinQAR - Finance Question Answer Reasoning Triplets is designed to bridge the gap between unstructured financial documents and structured AI training data. The system performs OCR on financial PDFs, generates contextual questions based on financial reasoning, provides comprehensive answers, and creates detailed reasoning chains - all optimized for fine-tuning language models to become domain-specific financial experts.
 
 ## Features
 
@@ -33,7 +33,7 @@ Digital-Persona is designed to bridge the gap between unstructured financial doc
 ## Project Structure
 
 ```
-Digital-Persona/
+FinQAR/
 ├── data/
 │   └── README.md                # Dataset documentation and download link
 ├── QAR-Generation/
